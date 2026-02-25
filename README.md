@@ -1,4 +1,4 @@
-#Contexte
+#  Contexte
 
 Ce défi porte sur le thème de la classification multimodale (texte et image) à grande échelle des codes de type de produit, dont l'objectif est de prédire le code de type de chaque produit tel que défini dans le catalogue de Rakuten France.
 
