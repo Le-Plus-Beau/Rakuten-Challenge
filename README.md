@@ -4,18 +4,18 @@ Ce défi porte sur le thème de la classification multimodale (texte et image) �
 
 Le catalogage des fiches produits par catégorisation des titres et des images est un problème fondamental pour toute plateforme de commerce électronique, avec des applications allant de la recherche et des recommandations personnalisées à la compréhension des requêtes. Les approches manuelles et basées sur des règles de catégorisation ne sont pas évolutives, car les produits commerciaux sont organisés en de nombreuses catégories. Le déploiement d'approches multimodales serait une technique utile pour les entreprises de commerce électronique, car elles peinent à catégoriser les produits à partir des images et des étiquettes fournies par les marchands et à éviter les doublons, notamment lorsqu'elles vendent à la fois des produits neufs et d'occasion provenant de marchands professionnels et non professionnels, comme c'est le cas pour Rakuten. Les progrès dans ce domaine de recherche ont été limités par le manque de données réelles issues de catalogues commerciaux. Ce défi présente plusieurs pistes de recherche intéressantes en raison de la nature intrinsèquement imprécise des étiquettes et des images de produits, de la taille des catalogues de commerce électronique modernes et de la distribution généralement déséquilibrée des données.
 
-#Description du problème
+#  Description du problème
 
 L’objectif de ce défi de données est la classification à grande échelle de données multimodales (texte et image) de produits en codes de type de produit .
 
 Par exemple, dans le catalogue Rakuten France, un produit portant la désignation ou le titre français « Klarstein Présentoir 2 Montres Optique Fibre », associé à une image et parfois à une description, est classé sous le code de type de produit 1500. D'autres produits, avec des titres, des images et des descriptions différents, appartiennent au même code de type de produit. À partir de ces informations, comme dans l'exemple ci-dessus, ce défi propose de modéliser un classificateur permettant d'attribuer à chaque produit son code de type de produit correspondant.
 
-#Métrique
+#  Métrique
 La métrique utilisée dans ce défi pour classer les participants est le score F1 pondéré .
 
 Le package Scikit-Learn dispose d'une implémentation de score F1 ( lien ) et peut être utilisé pour ce défi avec son averageparamètre défini sur "weighted".
 
-#Description des données
+#  Description des données
 Pour ce défi, Rakuten France met à disposition environ 99 000 fiches produits au format CSV, comprenant un ensemble d’entraînement (84 916) et un ensemble de test (13 812). L’ensemble de données contient les désignations, descriptions et images des produits, ainsi que leur code de type correspondant.
 
 Les données sont divisées selon deux critères, formant quatre ensembles distincts : entraînement ou test, entrée ou sortie.
