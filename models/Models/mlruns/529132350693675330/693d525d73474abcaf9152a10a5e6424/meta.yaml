@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/user/Rakuten-Challenge/models/Models/mlruns/529132350693675330/693d525d73474abcaf9152a10a5e6424/artifacts
+end_time: 1779017918165
+entry_point_name: ''
+experiment_id: '529132350693675330'
+lifecycle_stage: active
+run_id: 693d525d73474abcaf9152a10a5e6424
+run_name: logreg_baseline
+run_uuid: 693d525d73474abcaf9152a10a5e6424
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779017791051
+status: 3
+tags: []
+user_id: user
