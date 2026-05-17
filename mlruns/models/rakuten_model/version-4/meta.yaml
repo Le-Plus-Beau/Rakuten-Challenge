@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1779019757459
+current_stage: None
+description: null
+last_updated_timestamp: 1779019757459
+name: rakuten_model
+run_id: f97aa7aab8954db29859e34cb6021d4a
+run_link: null
+source: file:C:/Users/user/Rakuten-Challenge/mlruns/195342940810935551/f97aa7aab8954db29859e34cb6021d4a/artifacts/model
+status: READY
+status_message: null
+storage_location: file:C:/Users/user/Rakuten-Challenge/mlruns/195342940810935551/f97aa7aab8954db29859e34cb6021d4a/artifacts/model
+user_id: null
+version: 4
