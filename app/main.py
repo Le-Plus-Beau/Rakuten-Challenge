@@ -1,30 +1,29 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import joblib
+import mlflow.pyfunc
+import mlflow
 import re
 from bs4 import BeautifulSoup
-from pathlib import Path
 
-app = FastAPI()
+app = FastAPI(title="Rakuten Product Classification API")
 
-# chemins robustes
-try:
-    BASE_DIR = Path(__file__).resolve().parent
-except NameError:
-    BASE_DIR = Path.cwd()
+# --------------------------------------------------
+# ✅ MLflow config
+# --------------------------------------------------
+mlflow.set_tracking_uri("file:///C:/Users/user/Rakuten-Challenge/mlruns")
 
-ROOT_DIR = BASE_DIR.parent
+model = mlflow.pyfunc.load_model("models:/rakuten_model/Production")
 
-model_path = ROOT_DIR / "models" / "Models" / "model.joblib"
-vectorizer_path = ROOT_DIR / "models" / "Models" / "vectorizer.joblib"
-
-model = joblib.load(model_path)
-vectorizer = joblib.load(vectorizer_path)
-
+# --------------------------------------------------
+# ✅ DATA MODEL
+# --------------------------------------------------
 class Product(BaseModel):
     designation: str
-    description: str
+    description: str | None = ""
 
+# --------------------------------------------------
+# ✅ PREPROCESSING
+# --------------------------------------------------
 def clean_text(text):
     text = BeautifulSoup(text, "html.parser").get_text()
     text = text.lower()
@@ -32,6 +31,9 @@ def clean_text(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
+# --------------------------------------------------
+# ✅ ROUTES
+# --------------------------------------------------
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -39,7 +41,7 @@ def health():
 @app.post("/predict")
 def predict(product: Product):
     text = clean_text(product.designation + " " + product.description)
-    X = vectorizer.transform([text])
-    prediction = model.predict(X)[0]
+
+    prediction = model.predict([text])[0]
 
     return {"prediction": int(prediction)}
