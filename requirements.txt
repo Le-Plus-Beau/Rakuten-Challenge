@@ -13,10 +13,10 @@ beautifulsoup4==4.13.4
 requests==2.31.0
 
 # MLflow (tracking + model serving)
-mlflow==2.9.2
+mlflow==2.12.2
 
 # MLflow dependencies importantes (évite bugs Windows)
-setuptools>=70.0.0
+setuptools<70.0.0
 pyarrow==14.0.2
 
 # Optionnel mais utile
