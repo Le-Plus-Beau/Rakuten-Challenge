@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1778511620290
+current_stage: None
+description: null
+last_updated_timestamp: 1778511620290
+name: rakuten_model
+run_id: 5f1a124656194aa29fe66f572cfe0503
+run_link: null
+source: file:///c:/Users/user/Rakuten-Challenge/models/Models/mlruns/703190754615675407/5f1a124656194aa29fe66f572cfe0503/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///c:/Users/user/Rakuten-Challenge/models/Models/mlruns/703190754615675407/5f1a124656194aa29fe66f572cfe0503/artifacts/model
+user_id: null
+version: 1
