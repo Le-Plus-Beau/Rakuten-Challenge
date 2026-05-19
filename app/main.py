@@ -28,19 +28,28 @@ def clean_text(text):
     return text
 
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+import traceback
 
 @app.post("/predict")
 def predict(product: Product):
     try:
-        print("DEBUG types:", type(product.designation), type(product.description))
-        raw_text = product.designation + " " + (product.description or "")
+        designation = product.designation
+        description = product.description or ""
+        raw_text = designation + " " + description
         text = clean_text(raw_text)
 
-        prediction = model.predict([text])[0]
+        print("DEBUG raw_text type:", type(raw_text))
+        print("DEBUG cleaned text type:", type(text))
+        print("DEBUG cleaned text sample:", text[:80])
+
+        X_in = pd.DataFrame({"text": [text]})
+        prediction = model.predict(X_in)[0]
         return {"prediction": int(prediction)}
+
     except Exception as e:
+        tb = traceback.format_exc()
+        print("=== ERROR TRACEBACK ===")
+        print(tb)
         raise HTTPException(status_code=500, detail=f"{type(e).__name__}: {str(e)}")
+
 
