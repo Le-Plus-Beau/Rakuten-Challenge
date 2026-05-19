@@ -4,44 +4,43 @@ import mlflow.pyfunc
 import mlflow
 import re
 from bs4 import BeautifulSoup
+from fastapi import HTTPException
 
 app = FastAPI(title="Rakuten Product Classification API")
 
-# --------------------------------------------------
-# ✅ MLflow config
-# --------------------------------------------------
 mlflow.set_tracking_uri("file:///C:/Users/user/Rakuten-Challenge/mlruns")
-
 model = mlflow.pyfunc.load_model("models:/rakuten_model/Production")
 
-# --------------------------------------------------
-# ✅ DATA MODEL
-# --------------------------------------------------
 class Product(BaseModel):
     designation: str
     description: str | None = ""
 
-# --------------------------------------------------
-# ✅ PREPROCESSING
-# --------------------------------------------------
 def clean_text(text):
+    # ✅ force conversion systématique
+    if text is None:
+        text = ""
+    text = str(text)  # <-- clé : int -> "123"
+
     text = BeautifulSoup(text, "html.parser").get_text()
     text = text.lower()
     text = re.sub(r"[^a-zàâçéèêëîïôûùüÿñæœ0-9 ]", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
-# --------------------------------------------------
-# ✅ ROUTES
-# --------------------------------------------------
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 @app.post("/predict")
 def predict(product: Product):
-    text = clean_text(product.designation + " " + product.description)
+    try:
+        print("DEBUG types:", type(product.designation), type(product.description))
+        raw_text = product.designation + " " + (product.description or "")
+        text = clean_text(raw_text)
 
-    prediction = model.predict([text])[0]
+        prediction = model.predict([text])[0]
+        return {"prediction": int(prediction)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{type(e).__name__}: {str(e)}")
 
-    return {"prediction": int(prediction)}
