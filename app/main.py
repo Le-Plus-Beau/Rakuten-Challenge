@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import mlflow.pyfunc
 import mlflow
 import re
+import pandas as pd
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
 
